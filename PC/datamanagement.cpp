@@ -21,6 +21,7 @@ void DataManagement::onConnected()
 }
 void DataManagement::SocketStart()
 {
+    Server_IP = QString("ws://").append(Server_IP);
     socketClient = new TcpSocketCommunication(Server_IP + QString::fromStdString(":4001"), Device_Type, deviceIP,Device_Name);
     connect(&socketClient -> m_webSocket, &QWebSocket::connected, this, &DataManagement::onConnected);
     connect(&socketClient -> m_webSocket, &QWebSocket::disconnected, this, &DataManagement::onDisconnected);
@@ -49,6 +50,7 @@ void DataManagement::IdentificationSend(QString App,QString DeviceType,QString D
         identificationdatajson["App"] = App;
         identificationdatajson["DeviceType"] = DeviceType;
         identificationdatajson["DeviceName"] = DeviceName;
+        identificationdatajson["SystemName"] = "PC";
 
 
         socketClient->sendTextMessage("identification/SystemControl","",identificationdatajson);
@@ -67,4 +69,7 @@ void DataManagement::IdentificationSend(QString App,QString DeviceType,QString D
 void DataManagement::MessageReceived(QString message)
 {
     qDebug() << "MessageReceived: " << message;
+
+
+
 }

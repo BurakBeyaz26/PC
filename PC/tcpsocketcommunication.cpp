@@ -17,6 +17,7 @@ TcpSocketCommunication::TcpSocketCommunication(const QUrl &url, const QString &d
     qDebug() << "WebSocket server:" << url;
     connect(&m_webSocket, &QWebSocket::connected, this, &TcpSocketCommunication::onConnected);
     connect(&m_webSocket, &QWebSocket::disconnected, this, &TcpSocketCommunication::closed);
+
     open(QUrl(url), deviceType,deviceIPAddress,deviceName);
 }
 
