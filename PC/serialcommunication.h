@@ -8,6 +8,8 @@
 #include <QIODevice>
 #include <QDebug>
 
+#include "configdatas.h"
+
 class SerialCommunication : public QObject
 {
     Q_OBJECT
@@ -17,10 +19,12 @@ public:
     void initSerial();
     void closeSerial();
 
+    QSerialPort *serial;
 
+public slots:
+    void readyRead();
 signals:
 private:
-    QSerialPort *serial;
 
 };
 

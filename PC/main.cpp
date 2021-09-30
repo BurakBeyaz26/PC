@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 
 #include <QQuickStyle>
+#include <QQmlContext>
 
 #include "datamanagement.h"
 
@@ -13,7 +14,13 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+
+    DataManagement datamanage;
+
     QQmlApplicationEngine engine;
+
+    engine.rootContext()->setContextProperty( "__datamanage", &datamanage );
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -22,7 +29,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    DataManagement datamanage;
+
     datamanage.SerialStart();
     datamanage.SocketStart();
 

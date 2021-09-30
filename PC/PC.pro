@@ -7,6 +7,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        configdatas.cpp \
         datamanagement.cpp \
         log.cpp \
         main.cpp \
@@ -27,7 +28,18 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    configdatas.h \
     datamanagement.h \
     log.h \
     serialcommunication.h \
     tcpsocketcommunication.h
+
+
+#NOTES
+#   socat -d -d pty,raw,echo=0 pty,raw,echo=0           //to bridge
+#   echo "Test" > /dev/pts/3                            //to send data from terminal
+#
+#
+#
+3
+

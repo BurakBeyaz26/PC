@@ -73,7 +73,7 @@ void TcpSocketCommunication::onTestMessage(QString message)
 
 void TcpSocketCommunication::onTextMessageReceived(QString data)
 {
-   qDebug() << "ComingData : " << data;
+   //qDebug() << "ComingData : " << data;
 }
 
 void TcpSocketCommunication::close()

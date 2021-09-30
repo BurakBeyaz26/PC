@@ -12,7 +12,11 @@ SerialCommunication::~SerialCommunication()
 
 void SerialCommunication::initSerial()
 {
-    serial->setPortName("/dev/tty2");
+    ConfigDatas *config = ConfigDatas::getInstance();
+    QString port =  config->getSerialPort();
+    qDebug() << "port: " << port;
+
+    serial->setPortName(port);
     serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
@@ -22,6 +26,7 @@ void SerialCommunication::initSerial()
     if (serial->open(QIODevice::ReadWrite))
     {
         qDebug() << "Connected";
+        connect(serial, &QSerialPort::readyRead, this,&SerialCommunication::readyRead);
     }
     else
     {
@@ -33,4 +38,11 @@ void SerialCommunication::closeSerial()
 {
      if(serial->isOpen())
         serial->close();
+}
+void SerialCommunication::readyRead()
+{
+
+//    QByteArray data = serial->readAll();
+//    qDebug() << "serial : " << data;
+
 }

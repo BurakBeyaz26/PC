@@ -23,11 +23,20 @@ public:
     bool pisconnected = false;
     bool CorrectSystemFlag;
 
+    void processIncomingMessages(QString topic, QString message);
+    Q_INVOKABLE void sendSocketMessage(QString topic, QString message);
+
+    void processISerialMessages(QByteArray message);
+    Q_INVOKABLE void sendSerialMessage(QString message);
+
 public slots:
     void onConnected();
     void onDisconnected();
     void MessageReceived(QString message);
 
+
+    void SerialMessageReceived();
+    void IdentificationSend(QString App,QString DeviceType,QString DeviceName);
 
 private:
     QTimer *identificationtimer = new QTimer();
@@ -37,7 +46,6 @@ private:
     bool isSocketalreadyOpened = false;
     QString ClientStatesStateText;
 
-    void IdentificationSend(QString App,QString DeviceType,QString DeviceName);
 
     int SocketControlTimerValueinMsec;
 
@@ -53,6 +61,8 @@ protected:
     SerialCommunication serialComm;
 
 signals:
+
+    void colorChanged(QString colorName);
 
 };
 

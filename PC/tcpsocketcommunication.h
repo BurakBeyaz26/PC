@@ -2,13 +2,16 @@
 #define TCPSOCKETCOMMUNICATION_H
 
 #include <QWebSocket>
+#include <QJsonObject>
+#include <QJsonDocument>
+
 
 class TcpSocketCommunication : public QObject
 {
     Q_OBJECT
 public:
     explicit TcpSocketCommunication(const QUrl &url, const QString &deviceType, const QString &deviceIPAdress, const QString &deviceName);
-    void sendTextMessage(QString topic, QString message, QJsonObject messagejson);
+    void sendTextMessage(QString topic, QString message, QJsonObject messagejson = {});
     QWebSocket m_webSocket;
     QString s_deviceName;
     bool isSocketClosed;
